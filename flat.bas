@@ -8,6 +8,8 @@ dim ax as integer
 dim bx as integer
 dim cx as integer
 dim dx as integer
+'dim pPtr as integer
+'dim uLen as integer
 
 color 15,5
 cls
@@ -20,8 +22,12 @@ close f
 sub1=cast(function(as integer,as integer,as integer,as integer)as integer,mems)
 ax=10
 bx=20
-execss cast(sub ptr,mems),n
-n=sub1(ax,bx,cx,dx)
-print n
+var pPtr=cast(any ptr,(cuint(mems) and (not 4095)))
+var uLen=cast(any ptr,(((cuint(mems)+(n+savemem)+4095) and(not 4095))-cuint(pPtr))) 
+n=execss (cast(sub ptr,pPtr),cast(integer,ulen))
+if n=0 then
+	n=sub1(ax,bx,cx,dx)
+	print n
+end if
 deallocate(mems)
 
