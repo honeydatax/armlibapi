@@ -1,5 +1,14 @@
 #include once "execs.bi"
 public const savemem =97
+public sub pprint (byval aw as integer)
+	dim strs as string
+	dim z0 as zstring ptr
+	z0=cast(zstring ptr,aw)
+	print *z0
+end sub 
+public sub pcls ()
+	cls
+end sub 
 public sub messg ()
 	print "system call ver 1.0"
 end sub 
@@ -11,10 +20,12 @@ public sub debugs (r0 as integer,r1 as integer,r2 as integer,r3 as integer)
 	print r3
 end sub 
 
-public function syscalls cdecl(r0 as integer,r1 as integer,r2 as integer,r3 as integer)as integer
+public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 as integer,byval r3 as integer)as integer
 	dim rr as integer
 	if r0 = 0 then messg
 	if r0 = 1 then debugs(r0,r1,r2,r3)
+	if r0 = 2 then pcls()
+	if r0 = 3 then pprint(r1)
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
@@ -45,5 +56,6 @@ public function on_runs(files as string,ax as integer,bx as integer,cx as intege
 end function
 
 dim dx as integer
+color 15,5
 dx=on_runs (command(1),10,20,30,dx)
 system()
