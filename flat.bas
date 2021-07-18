@@ -1,12 +1,21 @@
 #include once "execs.bi"
 public const savemem =97
-public function syscalls cdecl(r0 as integer,r1 as integer,r2 as integer,r3 as integer)as integer
-	print r0
-	print r1
-	print r2
-	print r3
+public sub messg ()
 	print "system call ver 1.0"
-	return r3
+end sub 
+public sub debugs (r0 as integer,r1 as integer,r2 as integer,r3 as integer)
+	print "res:",
+	print r0,
+	print r1,
+	print r2,
+	print r3
+end sub 
+
+public function syscalls cdecl(r0 as integer,r1 as integer,r2 as integer,r3 as integer)as integer
+	dim rr as integer
+	if r0 = 0 then messg
+	if r0 = 1 then debugs(r0,r1,r2,r3)
+	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
 	dim syscallss as function (as integer,as integer,as integer,as integer)as integer
@@ -36,5 +45,5 @@ public function on_runs(files as string,ax as integer,bx as integer,cx as intege
 end function
 
 dim dx as integer
-print on_runs (command(1),10,20,30,dx)
+dx=on_runs (command(1),10,20,30,dx)
 system()
