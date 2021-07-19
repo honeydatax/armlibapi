@@ -3,6 +3,11 @@ main:
 	add	fp, sp, #4
 	sub	sp, sp, #16
 	str r3,var_sys_call
+	mov r0,#4
+	mov r1,#15
+	mov r2,#5
+	blx	r3
+	ldr r3,var_sys_call
 	mov r0,#2
 	blx	r3
 	ldr r3,var_sys_call
@@ -14,6 +19,62 @@ main:
 	blx	r3
 	ldr r3,var_sys_call
 	mov r0,#1
+	blx	r3
+	ldr r3,var_sys_call
+	mov r0,#5
+	mov r1,#0
+	blx	r3
+	ldr r3,var_sys_call
+	ldr r1,var_hellos
+	mov r0,#3
+	blx	r3
+	ldr r3,var_sys_call
+	mov r0,#5
+	mov r1,#2
+	blx	r3
+	ldr r3,var_sys_call
+	ldr r1,var_hellos
+	mov r0,#3
+	blx	r3
+	ldr r3,var_sys_call
+	mov r0,#5
+	mov r1,#3
+	blx	r3
+	ldr r3,var_sys_call
+	ldr r1,var_hellos
+	mov r0,#3
+	blx	r3
+	ldr r3,var_sys_call
+	mov r0,#5
+	mov r1,#4
+	blx	r3
+	ldr r3,var_sys_call
+	ldr r1,var_hellos
+	mov r0,#3
+	blx	r3
+	ldr r3,var_sys_call
+	mov r0,#5
+	mov r1,#5
+	blx	r3
+	ldr r3,var_sys_call
+	ldr r1,var_hellos
+	mov r0,#3
+	blx	r3
+	ldr r3,var_sys_call
+	mov r0,#5
+	mov r1,#6
+	blx	r3
+	ldr r3,var_sys_call
+	ldr r1,var_hellos
+	mov r0,#3
+	blx	r3
+	ldr r3,var_sys_call
+	mov r0,#5
+	mov r1,#7
+	blx	r3
+	ldr r3,var_sys_call
+	ldr r1,var_hellos
+	mov r0,#3
 	blx	r3
 	sub	sp, fp, #4
 	@ sp needed

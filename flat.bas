@@ -2,6 +2,12 @@
 public const savemem =97
 dim shared ddx as integer
 dim shared ddxx as integer
+public sub ccolor(r1 as integer,r2 as integer)
+	color r1,r2
+end sub
+public sub cccolor(r1 as integer)
+	color r1
+end sub
 public sub pprint (byval aw as integer)
 	dim aww as integer
 	dim z0 as zstring ptr
@@ -29,6 +35,8 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 	if r0 = 1 then debugs(r0,r1,r2,r3)
 	if r0 = 2 then pcls()
 	if r0 = 3 then pprint(r1)
+	if r0 = 4 then ccolor(r1,r2)
+	if r0 = 5 then cccolor(r1)
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
