@@ -6,8 +6,7 @@ main:
 	mov r0,#2
 	blx	r3
 	ldr r3,var_sys_call
-	mov r1,#var_hello
-	add r1,r1,r3
+	ldr r1,var_hellos
 	mov r0,#3
 	blx	r3
 	ldr r3,var_sys_call
@@ -20,4 +19,7 @@ main:
 	@ sp needed
 	pop	{fp, pc}
 var_sys_call: .word 0
-var_hello:    .byte "hello world",0,0,0,0,0
+var_hellos:   .word var_hello
+var_hello:    .asciz "hello world\0"
+var_helloss:   .word var_hello -var_hello
+
