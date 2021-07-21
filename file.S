@@ -10,6 +10,12 @@ main:
 	ldr r3,var_sys_call
 	mov r0,#2
 	blx	r3
+	ldr r4,var_sys_call
+	mov r1,#10
+	mov r2,#10
+	mov r3,#0
+	mov r0,#17
+	blx	r4
 	ldr r3,var_sys_call
 	ldr r1,var_hellos
 	mov r0,#3
@@ -120,11 +126,21 @@ main:
 	ldr r3,var_sys_call
 	blx	r3
 	ldr r3,var_sys_call
-	mov r0,#7
-	mov r1,#100
-	mov r2,#100
-	mul r1,r2,r1
+	mov r0,#9
+	mov r1,#15
 	blx	r3
+	ldr r3,var_sys_call
+	ldr r1,var_hellos
+	mov r0,#16
+	blx	r3
+lloops:
+	ldr r3,var_sys_call
+	mov r0,#18
+	blx	r3
+	mov r1,#27
+	cmp r0,r1
+	bne	lloops
+lloops2:
 	sub	sp, fp, #4
 	@ sp needed
 	pop	{fp, pc}

@@ -5,6 +5,20 @@ dim shared yy as integer
 dim shared cccolors as integer
 dim shared ddx as integer
 dim shared ddxx as integer
+
+public function iinkey() as integer
+	return asc(inkey())
+end function
+public sub llocate(r1 as integer,r2 as integer,r3 as integer)
+	locate r1,r2,r3
+end sub
+public sub stringdraw (byval aw as integer)
+	dim aww as integer
+	dim z0 as zstring ptr
+	aww=ddxx+aw
+	z0=cast(zstring ptr,aww)
+	draw string (xx,yy),*z0,cccolors
+end sub 
 public sub cccircle(r1 as integer)
 	circle(xx,yy),r1,cccolors
 end sub
@@ -81,6 +95,9 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 	if r0 = 13 then lline(r1,r2)
 	if r0 = 14 then ccircle(r1)
 	if r0 = 15 then cccircle(r1)
+	if r0 = 16 then stringdraw(r1)
+	if r0 = 17 then llocate(r1,r2,r3)
+	if r0 = 18 then rr=iinkey()
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
