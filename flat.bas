@@ -1,7 +1,29 @@
 #include once "execs.bi"
 public const savemem =97
+dim shared xx as integer
+dim shared yy as integer
+dim shared cccolors as integer
 dim shared ddx as integer
 dim shared ddxx as integer
+public sub sscreen(r1 as integer)
+	screen r1
+end sub
+public sub bbox(r1 as integer,r2 as integer)
+	line(xx,yy)-(xx+r1,yy+r2),cccolors,bf
+end sub
+public sub ssetxy(r1 as integer,r2 as integer)
+	xx=r1
+	yy=r2
+end sub
+public sub ssetcolor(r1 as integer)
+	cccolors=r1
+end sub
+public sub ssleep(r1 as integer)
+	sleep r1
+end sub
+public sub sscreenres(r1 as integer,r2 as integer,r3 as integer)
+	screenres r1,r2,r3
+end sub
 public sub ccolor(r1 as integer,r2 as integer)
 	color r1,r2
 end sub
@@ -37,6 +59,12 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 	if r0 = 3 then pprint(r1)
 	if r0 = 4 then ccolor(r1,r2)
 	if r0 = 5 then cccolor(r1)
+	if r0 = 6 then sscreenres(r1,r2,r3)
+	if r0 = 7 then ssleep(r1)
+	if r0 = 8 then sscreen(r1)
+	if r0 = 9 then ssetcolor(r1)
+	if r0 = 10 then ssetxy(r1,r2)
+	if r0 = 11 then bbox(r1,r2)
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
