@@ -93,9 +93,31 @@ main:
 	mov r1,#64
 	mov r2,#48
 	mov r0,#10
-	mul r1,r3,r1
-	mul r2,r3,r2
+	mul r1,r3,r0
+	mul r2,r3,r0
 	mov r0,#11
+	blx	r3
+	ldr r3,var_sys_call
+	mov r0,#9
+	mov r1,#0
+	blx	r3
+	ldr r3,var_sys_call
+	mov r1,#255
+	mov r2,#255
+	mov r0,#12
+	blx	r3
+	ldr r3,var_sys_call
+	mov r1,#50
+	mov r0,#14
+	blx	r3
+	ldr r3,var_sys_call
+	mov r1,#150
+	mov r0,#15
+	blx	r3
+	mov r1,#255
+	mov r2,#255
+	mov r0,#13
+	ldr r3,var_sys_call
 	blx	r3
 	ldr r3,var_sys_call
 	mov r0,#7
