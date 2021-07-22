@@ -6,8 +6,14 @@ dim shared cccolors as integer
 dim shared ddx as integer
 dim shared ddxx as integer
 
+public sub exits()
+	system()
+end sub
 public function iinkey() as integer
-	return asc(inkey())
+	dim r as integer
+	r=asc(inkey())
+	if r=255 then r=asc(mid(inkey(),2,1))
+	return r
 end function
 public sub llocate(r1 as integer,r2 as integer,r3 as integer)
 	locate r1,r2,r3
@@ -98,6 +104,7 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 	if r0 = 16 then stringdraw(r1)
 	if r0 = 17 then llocate(r1,r2,r3)
 	if r0 = 18 then rr=iinkey()
+	if r0 = 19 then exits()
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
@@ -110,7 +117,7 @@ public function on_runs(files as string,ax as integer,bx as integer,cx as intege
 	f=freefile()
 	open files for binary as f
 	n=lof(f)
-	mems=execss(n+savemem)
+	mems=aallocate(n+savemem)
 	if mems <> -1 then get #f,1,*mems,n
 	close f
 
@@ -123,7 +130,7 @@ public function on_runs(files as string,ax as integer,bx as integer,cx as intege
 	else
 		print "error:"
 	end if
-	uexecss(mems,n+savemem)
+	ddeallocate(mems,n+savemem)
 	return nn
 end function
 
