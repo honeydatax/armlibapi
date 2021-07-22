@@ -8,6 +8,30 @@ dim shared cccolors as integer
 dim shared ddx as integer
 dim shared ddxx as integer
 
+public function lesss(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=(r1<r2)
+	if i<>0 then i=1
+	return i
+end function
+public function bigs(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=(r1>r2)
+	if i<>0 then i=1
+	return i
+end function
+public function diferent(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=(r1<>r2)
+	if i<>0 then i=1
+	return i
+end function
+public function likes(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=(r1=r2)
+	if i<>0 then i=1
+	return i
+end function
 public function divs(r1 as integer,r2 as integer)as integer
 	dim i as integer
 	i=r1/r2
@@ -137,6 +161,10 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 	if r0 = 22 then rr=subs(r1,r2)
 	if r0 = 23 then rr=mults(r1,r2)
 	if r0 = 24 then rr=divs(r1,r2)
+	if r0 = 25 then rr=likes(r1,r2)
+	if r0 = 26 then rr=diferent(r1,r2)
+	if r0 = 27 then rr=bigs(r1,r2)
+	if r0 = 28 then rr=lesss(r1,r2)
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
