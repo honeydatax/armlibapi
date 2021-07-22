@@ -8,6 +8,30 @@ dim shared cccolors as integer
 dim shared ddx as integer
 dim shared ddxx as integer
 
+public function divs(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=r1/r2
+	return i
+end function
+public function mults(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=r1*r2
+	return i
+end function
+public function subs(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=r1-r2
+	return i
+end function
+public function adds(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=r1+r2
+	return i
+end function
+public sub numbers(r1 as integer)
+	print " ";r1;" ";
+end sub
+
 public sub exits()
 	ddeallocate(mems,sh+savemem)
 	system()
@@ -108,6 +132,11 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 	if r0 = 17 then llocate(r1,r2,r3)
 	if r0 = 18 then rr=iinkey()
 	if r0 = 19 then exits()
+	if r0 = 20 then numbers(r1)
+	if r0 = 21 then rr=adds(r1,r2)
+	if r0 = 22 then rr=subs(r1,r2)
+	if r0 = 23 then rr=mults(r1,r2)
+	if r0 = 24 then rr=divs(r1,r2)
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
