@@ -1,5 +1,7 @@
 #include once "execs.bi"
 public const savemem =97
+dim shared mems as integer ptr
+dim shared sh as integer
 dim shared xx as integer
 dim shared yy as integer
 dim shared cccolors as integer
@@ -7,6 +9,7 @@ dim shared ddx as integer
 dim shared ddxx as integer
 
 public sub exits()
+	ddeallocate(mems,sh+savemem)
 	system()
 end sub
 public function iinkey() as integer
@@ -109,14 +112,15 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
 	dim syscallss as function (as integer,as integer,as integer,as integer)as integer
-	dim mems as integer ptr
 	dim n as integer
 	dim f as integer
 	dim sub1 as function(as integer,as integer,as integer,as integer)as integer
 	dim nn as integer
 	f=freefile()
+	if ax=1 then screenres 640,480,4
 	open files for binary as f
 	n=lof(f)
+	sh=n
 	mems=aallocate(n+savemem)
 	if mems <> -1 then get #f,1,*mems,n
 	close f
@@ -131,10 +135,11 @@ public function on_runs(files as string,ax as integer,bx as integer,cx as intege
 		print "error:"
 	end if
 	ddeallocate(mems,n+savemem)
+	system()
 	return nn
 end function
 
 dim dx as integer
 color 15,5
-dx=on_runs (command(1),10,20,30,dx)
+dx=on_runs (command(1),val(command(2)),0,0,0)
 system()
