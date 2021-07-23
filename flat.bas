@@ -8,6 +8,27 @@ dim shared cccolors as integer
 dim shared ddx as integer
 dim shared ddxx as integer
 
+
+public function nots(r1 as integer)as integer
+	dim i as integer
+	i=not(r1)
+	return i
+end function
+public function xors(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=(r1 xor r2)
+	return i
+end function
+public function ands(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=(r1 and r2)
+	return i
+end function
+public function ors(r1 as integer,r2 as integer)as integer
+	dim i as integer
+	i=(r1 or r2)
+	return i
+end function
 public function lesss(r1 as integer,r2 as integer)as integer
 	dim i as integer
 	i=(r1<r2)
@@ -165,6 +186,10 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 	if r0 = 26 then rr=diferent(r1,r2)
 	if r0 = 27 then rr=bigs(r1,r2)
 	if r0 = 28 then rr=lesss(r1,r2)
+	if r0 = 29 then rr=ors(r1,r2)
+	if r0 = 30 then rr=ands(r1,r2)
+	if r0 = 31 then rr=xors(r1,r2)
+	if r0 = 32 then rr=nots(r1)
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
