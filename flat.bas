@@ -1,4 +1,5 @@
 #include once "execs.bi"
+#include "string.bi"
 public const savemem =97
 dim shared mems as integer ptr
 dim shared sh as integer
@@ -8,7 +9,17 @@ dim shared cccolors as integer
 dim shared ddx as integer
 dim shared ddxx as integer
 
-
+public sub strcopy (aw as integer, aaw as integer)
+	dim aww as integer
+	dim aaww as integer
+	dim z0 as zstring ptr
+	dim z1 as zstring ptr
+	aww=ddxx+aw
+	aaww=ddxx+aaw
+	z0=cast(zstring ptr,aww)
+	z1=cast(zstring ptr,aaww)
+	*z0=>*z1
+end sub 
 public function nots(r1 as integer)as integer
 	dim i as integer
 	i=not(r1)
@@ -190,6 +201,7 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 	if r0 = 30 then rr=ands(r1,r2)
 	if r0 = 31 then rr=xors(r1,r2)
 	if r0 = 32 then rr=nots(r1)
+	if r0 = 33 then strcopy(r1,r2)
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
