@@ -9,6 +9,22 @@ dim shared cccolors as integer
 dim shared ddx as integer
 dim shared ddxx as integer
 
+public sub strcat (aw as integer, aaw as integer)
+	dim aww as integer
+	dim aaww as integer
+	dim z0 as zstring ptr
+	dim z2 as zstring ptr
+	dim z1 as zstring ptr
+	dim ll as integer
+	aww=ddxx+aw
+	aaww=ddxx+aaw
+	z0=cast(zstring ptr,aww)
+	z1=cast(zstring ptr,aaww)
+	ll=len(*z0)
+	aww=ddxx+aw+ll
+	z2=cast(zstring ptr,aww)
+	*z2=>*z1
+end sub 
 public sub strcopy (aw as integer, aaw as integer)
 	dim aww as integer
 	dim aaww as integer
@@ -202,6 +218,7 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 	if r0 = 31 then rr=xors(r1,r2)
 	if r0 = 32 then rr=nots(r1)
 	if r0 = 33 then strcopy(r1,r2)
+	if r0 = 34 then strcat(r1,r2)
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
