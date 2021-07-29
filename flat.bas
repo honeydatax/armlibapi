@@ -9,6 +9,22 @@ dim shared cccolors as integer
 dim shared ddx as integer
 dim shared ddxx as integer
 
+public function strcmp (aw as integer, aaw as integer)as integer
+	dim aww as integer
+	dim aaww as integer
+	dim z0 as zstring ptr
+	dim z2 as zstring ptr
+	dim z1 as zstring ptr
+	dim ll as integer
+	aww=ddxx+aw
+	aaww=ddxx+aaw
+	z0=cast(zstring ptr,aww)
+	z1=cast(zstring ptr,aaww)
+	if *z2=*z1 then ll=0
+	if *z1>*z2 then ll=1
+	if *z1<*z2 then ll=-1
+	return ll
+end function 
 public function strlen (byval aw as integer)as integer
 	dim ll as integer
 	dim aww as integer
@@ -229,6 +245,7 @@ public function syscalls cdecl(byval r0 as integer,byval r1 as integer,byval r2 
 	if r0 = 33 then strcopy(r1,r2)
 	if r0 = 34 then strcat(r1,r2)
 	if r0 = 35 then rr=strlen(r1)
+	if r0 = 36 then rr=strcmp(r1,r2)
 	return rr
 end function
 public function on_runs(files as string,ax as integer,bx as integer,cx as integer,dx as integer)as integer
