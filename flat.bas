@@ -259,7 +259,12 @@ public function on_runs(files as string,ax as integer,bx as integer,cx as intege
 	open files for binary as f
 	n=lof(f)
 	sh=n
+#ifdef __FB_DOS__
+	mems=allocate(n+savemem)
+#else
 	mems=aallocate(n+savemem)
+#endif 
+
 	if mems <> -1 then get #f,1,*mems,n
 	close f
 
@@ -272,7 +277,11 @@ public function on_runs(files as string,ax as integer,bx as integer,cx as intege
 	else
 		print "error:"
 	end if
+#ifdef __FB_DOS__
+	deallocate(mems)
+#else
 	ddeallocate(mems,n+savemem)
+#endif 	
 	system()
 	return nn
 end function
